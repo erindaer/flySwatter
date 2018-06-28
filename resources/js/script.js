@@ -1,5 +1,5 @@
 // Setting up canvas's height and width
-var canvas = document.querySelector('canvas');
+var canvas = document.getElementById('gameCanvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -7,9 +7,12 @@ canvas.height = window.innerHeight;
 var c = canvas.getContext('2d');
 
 // Declaring our global variables
-var wave = 2;
+const TIME_PER_GAME = 3; // minutes
+const TIME_PER_WAVE = 15; // seconds
 var numFlies = 3;
+var counter = 0;
 
+/*
 function getFlies() {
     for(var i = 0; i < numFlies; i++) {
         var x = Math.random() * window.innerWidth;
@@ -22,8 +25,8 @@ function getFlies() {
     }
 };
 
-var startGame = function() {
-    // 1000 ms = 1 sec, so 60,000 = 1 min
+
+var runWaves = function(sec) {
     var countDown = setInterval(function() {
         var x = Math.random() * window.innerWidth;
         var y = Math.random() * window.innerHeight;
@@ -42,7 +45,34 @@ var startGame = function() {
             c.fillText("GAME OVER", window.innerWidth / 2, window.innerHeight / 2);
         }
     }, 1000);
+}*/
+
+var displayCountDown = function(sec) {
+    const minutes = Math.floor(sec / 60)
+    const reminderSeconds = sec % 60;
+    console.log(minutes + ':' + reminderSeconds);
 }
 
-// Game starts here!
+var getCountDown = function(seconds) {
+    const now = Date.now();
+    const then = now + seconds * 1000;
+    displayCountDown(seconds);
+    
+    var countDown = setInterval(function() {
+        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        displayCountDown(secondsLeft);
+        if (secondsLeft <= 0){
+            clearInterval(countDown);
+            return;
+        }
+    }, 1000);
+}
+
+// MAIN FUNCTION
+var startGame = function() {
+    getCountDown(TIME_PER_GAME * 60);
+    //runWaves(TIME_PER_WAVE);
+    //updateUserScores();
+}
+
 startGame();
