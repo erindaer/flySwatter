@@ -1,0 +1,49 @@
+/* Setup */
+html, body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.container-main{
+    display: grid;
+    height: 100%;
+    grid-template-columns: [col-begin]1fr 1fr 1fr 1fr 1fr [col-mid]1fr 1fr 1fr 1fr 1fr[col-end];
+    grid-template-rows: [row-begin]1fr 1fr 1fr 1fr 1fr [row-mid]1fr 1fr 1fr 1fr 1fr[row-end];
+}
+#canvas{
+    grid-column: col-begin / col-end;
+    grid-row: row-begin / row-end;
+	height: 100%;
+	width: 100%;
+	background-color: crimson;
+}
+/* Menu */
+.menu{
+    grid-column: 5 / span 2;
+    grid-row: 5 / span 2;
+    align-self: center;
+    justify-self: center;
+    border-radius: 30%;
+    //background-color: #191919;
+    
+}
+@keyframes pulse{
+    from{font-size: 5rem; background-color: rgba(0, 0, 0, 0.4); width: 100%; opacity: 0;}
+    to{font-size: 6rem; background-color: rgba(0, 0, 0, 0.19); width: 100%; opacity: 1;}
+}
+.start{
+    font-size: 5rem;
+    font-family: Boogaloo;
+    color: #fff;
+    cursor: crosshair;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    animation-play-state: running;
+    animation-name: pulse;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.start:visited{
+    animation-play-state: paused;
+}
